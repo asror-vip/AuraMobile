@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #222b23;
+  --ink-secondary: #42493f;
+  --muted: #707968;
+  --muted-light: #909486;
+  --brand-green: #314b35;
+  --brand-green-hover: #243c28;
+  --brand-green-light: #546b43;
+  --brand-green-focus: #638465;
+  --pale: #f0f2e9;
+  --pale-subtle: #f5f6f0;
+  --topbar-bg: #eef0e7;
+  --hero-bg: #ecefe4;
+  --line: #e8e9e2;
+  --paper: #fcfcf9;
+  --card-bg: #ffffff;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-muted: var(--muted);
+  --color-muted-light: var(--muted-light);
+  --color-brand-green: var(--brand-green);
+  --color-brand-green-hover: var(--brand-green-hover);
+  --color-brand-green-light: var(--brand-green-light);
+  --color-brand-green-focus: var(--brand-green-focus);
+  --color-pale: var(--pale);
+  --color-pale-subtle: var(--pale-subtle);
+  --color-topbar-bg: var(--topbar-bg);
+  --color-hero-bg: var(--hero-bg);
+  --color-line: var(--line);
+  --color-paper: var(--paper);
+  --color-card-bg: var(--card-bg);
+  --font-manrope: var(--font-manrope);
+  --font-sans: var(--font-dm-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-dm-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-manrope), sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f0f2e9;
+}
+::-webkit-scrollbar-thumb {
+  background: #c5ccc0;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9fa899;
+}
+
+/* Animations & Transitions (150ms - 450ms) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleInSubtle {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-5deg);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 250ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 350ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleInSubtle 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float-phone {
+  animation: floatGentle 4.5s ease-in-out infinite;
+}
+
+@keyframes slideProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-slide-progress {
+  animation: slideProgress 5500ms linear forwards;
+}
+
+.animation-paused {
+  animation-play-state: paused !important;
+}
+
+@keyframes phoneGlowPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+}
+
+.animate-glow-pulse {
+  animation: phoneGlowPulse 5.5s ease-in-out infinite;
+}
+
+/* Micro-interaction transition defaults */
+button, a, input, select, textarea {
+  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Scroll Reveal Animations */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s ease var(--reveal-delay, 0ms),
+              transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-card.revealed:hover {
+  transform: translateY(-4px);
+  transition-delay: 0ms;
+}
+
+/* Button & icon micro-interactions */
+.button-hover-arrow:hover svg:last-child {
+  transform: translateX(3px);
+}
+
+.button-hover-corner:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* Accessibility: Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
